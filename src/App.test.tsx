@@ -1,9 +1,8 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import Calculator from "./App";
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders Calculator with initial display "0"', () => {
+  render(<Calculator />);
+  const displayElement = screen.getByText("0");
+  expect(displayElement).toBeInTheDocument();
 });
