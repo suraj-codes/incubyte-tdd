@@ -28,6 +28,17 @@ test("handles addition correctly", () => {
   expect(display).toHaveTextContent("3");
 });
 
+test("handles substraction correctly", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("4"));
+  fireEvent.click(screen.getByText("-"));
+  fireEvent.click(screen.getByText("2"));
+  fireEvent.click(screen.getByText("="));
+
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("2");
+});
+
 test("handles decimal input correctly", () => {
   render(<Calculator />);
   fireEvent.click(screen.getByText("1"));
@@ -41,10 +52,11 @@ test("handles decimal input correctly", () => {
 test("handles number keys from keyboard correctly", () => {
   render(<Calculator />);
   fireEvent.keyDown(document, { key: "1" });
-  expect(screen.getByText("1")).toBeInTheDocument();
+
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("1");
 
   fireEvent.keyDown(document, { key: "2" });
-  const display = screen.getByTestId("calculator-display");
   expect(display).toHaveTextContent("12");
 });
 

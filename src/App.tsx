@@ -15,8 +15,18 @@ function App() {
 
   const handleEquals = () => {
     if (operation && memory !== null) {
-      const result =
-        operation === "+" ? memory + parseFloat(display) : parseFloat(display);
+      let result;
+      switch (operation) {
+        case "+":
+          result = memory + parseFloat(display);
+          break;
+        case "-":
+          result = memory - parseFloat(display);
+          break;
+          break;
+        default:
+          return;
+      }
       setDisplay(result.toString());
       setMemory(null);
       setOperation(null);
@@ -41,7 +51,8 @@ function App() {
 
   useEffect(() => {
     const handleKeyPress = (e: { key: string }) => {
-      if (/^[0-9]$/.test(e.key)) setDisplay(display + e.key);
+      if (/^[0-9]$/.test(e.key))
+        setDisplay(display === "0" ? e.key : display + e.key);
       if (e.key === "+") handleOperator("+");
       if (e.key === "=") handleEquals();
       if (e.key === ".") handleDecimal();
@@ -61,12 +72,17 @@ function App() {
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((num) => (
           <button
             key={num}
-            onClick={() => setDisplay(display + num.toString())}
+            onClick={() =>
+              setDisplay(
+                display === "0" ? num.toString() : display + num.toString()
+              )
+            }
           >
             {num}
           </button>
         ))}
         <button onClick={() => handleOperator("+")}>+</button>
+        <button onClick={() => handleOperator("-")}>-</button>
         <button onClick={handleEquals}>=</button>
         <button onClick={handleDecimal}>.</button>
         <button onClick={handleClear}>Clear</button>
