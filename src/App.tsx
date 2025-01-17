@@ -23,6 +23,12 @@ function App() {
     }
   };
 
+  const handleDecimal = () => {
+    if (!display.includes(".")) {
+      setDisplay(display + ".");
+    }
+  };
+
   return (
     <div className="calculator">
       <div className="display" data-testid="calculator-display">
@@ -39,6 +45,7 @@ function App() {
         ))}
         <button onClick={() => handleOperator("+")}>+</button>
         <button onClick={handleEquals}>=</button>
+        <button onClick={handleDecimal}>.</button>
       </div>
     </div>
   );

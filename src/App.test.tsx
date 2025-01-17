@@ -27,3 +27,13 @@ test("handles addition correctly", () => {
   const display = screen.getByTestId("calculator-display");
   expect(display).toHaveTextContent("3");
 });
+
+test("handles decimal input correctly", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("1"));
+  fireEvent.click(screen.getByText("."));
+  fireEvent.click(screen.getByText("2"));
+
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("1.2");
+});
