@@ -50,6 +50,28 @@ test("handles multiplication correctly", () => {
   expect(display).toHaveTextContent("20");
 });
 
+test("handles division correctly", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("4"));
+  fireEvent.click(screen.getByText("/"));
+  fireEvent.click(screen.getByText("2"));
+  fireEvent.click(screen.getByText("="));
+
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("2");
+});
+
+test("handles false division correctly", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("4"));
+  fireEvent.click(screen.getByText("/"));
+  fireEvent.keyDown(document, { key: "0" });
+  fireEvent.click(screen.getByText("="));
+
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("Error");
+});
+
 test("handles decimal input correctly", () => {
   render(<Calculator />);
   fireEvent.click(screen.getByText("1"));

@@ -26,7 +26,12 @@ function App() {
         case "*":
           result = memory * parseFloat(display);
           break;
-
+        case "/":
+          if (parseFloat(display) !== 0) {
+            result = memory / parseFloat(display);
+          } else {
+            result = "Error";
+          }
           break;
         default:
           return;
@@ -88,6 +93,7 @@ function App() {
         <button onClick={() => handleOperator("+")}>+</button>
         <button onClick={() => handleOperator("-")}>-</button>
         <button onClick={() => handleOperator("*")}>*</button>
+        <button onClick={() => handleOperator("/")}>/</button>
         <button onClick={handleEquals}>=</button>
         <button onClick={handleDecimal}>.</button>
         <button onClick={handleClear}>Clear</button>
