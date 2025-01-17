@@ -16,3 +16,14 @@ test("updates display when number buttons are clicked", () => {
   const display = screen.getByTestId("calculator-display");
   expect(display).toHaveTextContent("1");
 });
+
+test("handles addition correctly", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("1"));
+  fireEvent.click(screen.getByText("+"));
+  fireEvent.click(screen.getByText("2"));
+  fireEvent.click(screen.getByText("="));
+
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("3");
+});
