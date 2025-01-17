@@ -37,3 +37,13 @@ test("handles decimal input correctly", () => {
   const display = screen.getByTestId("calculator-display");
   expect(display).toHaveTextContent("1.2");
 });
+
+test("handles number keys from keyboard correctly", () => {
+  render(<Calculator />);
+  fireEvent.keyDown(document, { key: "1" });
+  expect(screen.getByText("1")).toBeInTheDocument();
+
+  fireEvent.keyDown(document, { key: "2" });
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("12");
+});

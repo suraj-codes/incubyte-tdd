@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -28,6 +28,25 @@ function App() {
       setDisplay(display + ".");
     }
   };
+
+  const handleClear = () => {
+    setDisplay("0");
+    setMemory(null);
+    setOperation(null);
+  };
+
+  useEffect(() => {
+    const handleKeyPress = (e: { key: string }) => {
+      if (/^[0-9]$/.test(e.key)) setDisplay(display + e.key);
+      if (e.key === "+") handleOperator("+");
+      if (e.key === "=") handleEquals();
+      if (e.key === ".") handleDecimal();
+      if (e.key === "Escape") handleClear();
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [display]);
 
   return (
     <div className="calculator">
