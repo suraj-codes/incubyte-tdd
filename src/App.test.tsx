@@ -39,6 +39,17 @@ test("handles substraction correctly", () => {
   expect(display).toHaveTextContent("2");
 });
 
+test("handles multiplication correctly", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("4"));
+  fireEvent.click(screen.getByText("*"));
+  fireEvent.click(screen.getByText("5"));
+  fireEvent.click(screen.getByText("="));
+
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("20");
+});
+
 test("handles decimal input correctly", () => {
   render(<Calculator />);
   fireEvent.click(screen.getByText("1"));
