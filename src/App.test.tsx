@@ -47,3 +47,20 @@ test("handles number keys from keyboard correctly", () => {
   const display = screen.getByTestId("calculator-display");
   expect(display).toHaveTextContent("12");
 });
+
+test("Clear key resets the display to 0", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("1"));
+  fireEvent.click(screen.getByText("Clear"));
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("0");
+});
+
+test("Backspace key removes the last digit", () => {
+  render(<Calculator />);
+  fireEvent.click(screen.getByText("4"));
+  fireEvent.click(screen.getByText("2"));
+  fireEvent.click(screen.getByText("←"));
+  const display = screen.getByTestId("calculator-display");
+  expect(display).toHaveTextContent("4");
+});

@@ -35,6 +35,10 @@ function App() {
     setOperation(null);
   };
 
+  const handleBackspace = () => {
+    setDisplay(display.length > 1 ? display.slice(0, -1) : "0");
+  };
+
   useEffect(() => {
     const handleKeyPress = (e: { key: string }) => {
       if (/^[0-9]$/.test(e.key)) setDisplay(display + e.key);
@@ -65,6 +69,8 @@ function App() {
         <button onClick={() => handleOperator("+")}>+</button>
         <button onClick={handleEquals}>=</button>
         <button onClick={handleDecimal}>.</button>
+        <button onClick={handleClear}>Clear</button>
+        <button onClick={handleBackspace}>←</button>
       </div>
     </div>
   );
